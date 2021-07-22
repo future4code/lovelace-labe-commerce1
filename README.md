@@ -30,8 +30,21 @@
 
 ### Estado mínimo
 
-- Filtro valor máximo (App)
-- Filtro valor mínimo (App)
-- Filtro nome (App)
-- Ordenação (Card Produtos)
-- Produtos selecionados (App)
+- filtroValorMaximo: String (App)
+- filtroValorMinimo: String (App)
+- filtroNome: String (App)
+- ordenacao: String (Card Produtos)
+- produtosSelecionados: Array de objetos (App)
+
+### Props
+
+- Card Filtro
+    - setInput
+- Card Produtos
+    - listaProdutos
+    - adicionarProdutosAoCarrinho
+    - filtros (todos)
+- Card Carrinho
+    - produtosSelecionados
+    - listaProdutos
+    - removerProdutoCarrinho
