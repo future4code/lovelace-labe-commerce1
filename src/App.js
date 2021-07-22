@@ -104,10 +104,15 @@ class App extends React.Component {
       <div className="App">
         <ContainerFiltro  
           setInput={this.setInput}
+          filtros={{    
+            filtroValorMaximo: this.state.filtroValorMaximo,
+            filtroValorMinimo: this.state.filtroValorMinimo,
+            filtroNome: this.state.filtroNome,
+          }}
         />
 
         <ContainerProdutos
-          listaProdutos={this.listaProdutos}
+          listaProdutos={listaProdutos}
           adicionarProdutosAoCarrinho={this.adicionarProdutosAoCarrinho}
           filtros={{    
             filtroValorMaximo: this.state.filtroValorMaximo,
