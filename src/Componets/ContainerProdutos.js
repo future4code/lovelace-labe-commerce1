@@ -2,18 +2,19 @@ import React from 'react'
 import CardProduto from './CardProduto'
 import Styled from 'styled-components'
 
-const Card = Styled.div`
+const Container = Styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
+    width:100%;
 `
 const Board = Styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 1rem;
-    justify-items: center;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
 
     width: 100%;
@@ -32,7 +33,8 @@ const FiltroOrdenacao = Styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    height: 55px;
 `
 
 export default class ContainerProdutos extends React.Component {
@@ -78,7 +80,7 @@ export default class ContainerProdutos extends React.Component {
 
         return(
             <div className="ContainerProdutos">
-                <Card>
+                <Container>
                     <Header>
                         <h2>Produtos disponíveis: {this.props.listaProdutos.length}</h2>
                         <FiltroOrdenacao>
@@ -103,7 +105,7 @@ export default class ContainerProdutos extends React.Component {
                             })
                         }
                     </Board>
-                </Card>
+                </Container>
             </div>
         )
     }
