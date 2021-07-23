@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+
 import ContainerCarrinho from './Componets/ContainerCarrinho';
 import ContainerFiltro from './Componets/ContainerFiltro';
 import ContainerProdutos from './Componets/ContainerProdutos';
@@ -39,6 +40,17 @@ class App extends React.Component {
     filtroValorMinimo: "",
     filtroNome: "",
     carrinho: []  
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot){
+    if (this.state.produtosSelecionados !== prevState.produtosSelecionados) {
+      localStorage.setItem( 'produtos_selecionados', JSON.stringify(this.state.produtosSelecionados) )
+    }
+  }
+
+  componentDidMount(){
+    const produtos_selecionados = JSON.parse(localStorage.getItem('produtos_selecionados'))
+    this.setState({ produtosSelecionados: produtos_selecionados })
   }
 
   adicionarProdutosAoCarrinho = async (id) => {
@@ -91,8 +103,13 @@ class App extends React.Component {
     // await this.setState({ produtosSelecionados: novaLista })
     // 
   }
+<<<<<<< HEAD
   
   
+=======
+
+  removerProdutoCarrinho = async (id) => {
+>>>>>>> 566e0f7019af37c0eef84ff8a2b385d208a554fe
 
 
 
