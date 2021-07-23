@@ -70,6 +70,7 @@ class App extends React.Component {
 
     await this.setState({ produtosSelecionados: novaLista })
   }
+
   removerProdutoCarrinho = async (id) => {
 
     const [produtoARemover] = this.state.produtosSelecionados.filter(produto => {
