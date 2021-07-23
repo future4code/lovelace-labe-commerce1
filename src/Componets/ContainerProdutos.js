@@ -42,7 +42,8 @@ export default class ContainerProdutos extends React.Component {
     }
 
     adicionarProdutoAoCarrinho = (id) => {
-        this.props.adicionarProdutoAoCarrinho(id)
+        this.props.adicionarProdutosAoCarrinho(id)
+        console.log(id,"produto")
     }
     onChangeOrdenacao = event => {
         this.setState({ ordenacao: event.target.value })
