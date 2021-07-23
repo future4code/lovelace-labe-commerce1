@@ -2,21 +2,51 @@ import React from 'react'
 import Styled from 'styled-components'
 
 const Card = Styled.div`
-    width: 300px;
-    height: 350px;
     transition: 0.3s;
-    border: 1px solid black;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 200px;
+    margin-top: 1rem;
+    text-align: center;
+
+    height: 345px;
 `
 const Image = Styled.img`
     width: 100%;
-    height: 70%;
+    height: 200px;
+    margin-bottom: 10px;
+`
+const Price = Styled.p`
+    color: grey;
+    font-size: 18px;
+`
+const Description = Styled.div`
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 `
 
+const Button = Styled.button`
+    margin-top: 10px;
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #222;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-weight:700;
+`
 
 export default class CardProduto extends React.Component {
     render(){
@@ -29,13 +59,13 @@ export default class CardProduto extends React.Component {
                     src={imageUrl} 
                     alt={name}
                 />
-                <div>
-                    <p>{name}</p>
-                    <p>R$: {value}</p>
-                </div>
-                <button onClick={() => this.props.adicionarProdutosAoCarrinho(id)}>
+                <Description>
+                    <h4>{name}</h4>
+                    <Price>R$: {value}</Price>
+                </Description>
+                <Button onClick={() => this.props.adicionarProdutosAoCarrinho(id)}>
                     Adicionar ao carrinho
-                </button>
+                </Button>
             </Card>
         )
     }
