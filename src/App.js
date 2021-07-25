@@ -38,28 +38,21 @@ class App extends React.Component {
     filtroValorMaximo: "",
     filtroValorMinimo: "",
     filtroNome: "",
-    produtosSelecionados: [
-      {
-        id: 1,
-        quantidade: 4
-      },
-      {
-        id: 2,
-        quantidade: 3
-      }
-    ]  
+    produtosSelecionados: []  
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot){
-  //   if (this.state.produtosSelecionados !== prevState.produtosSelecionados) {
-  //     localStorage.setItem( 'produtos_selecionados', JSON.stringify(this.state.produtosSelecionados) )
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState, snapshot){
+    if (this.state.produtosSelecionados !== prevState.produtosSelecionados) {
+      localStorage.setItem( 'produtos_selecionados', JSON.stringify(this.state.produtosSelecionados) )
+    }
+  }
 
-  // componentDidMount(){
-  //   const produtos_selecionados = JSON.parse(localStorage.getItem('produtos_selecionados'))
-  //   this.setState({ produtosSelecionados: produtos_selecionados })
-  // }
+  componentDidMount(){
+    const produtos_selecionados = JSON.parse(localStorage.getItem('produtos_selecionados'))
+
+    if( produtos_selecionados )
+      this.setState({ produtosSelecionados: produtos_selecionados })
+  }
 
   adicionarProdutoAoCarrinho = async (id) => {
 

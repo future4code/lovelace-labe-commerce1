@@ -75,6 +75,7 @@ class ContainerCarrinho extends React.Component {
                     <TituloCarrinho>Carrinho:</TituloCarrinho>                
                     <TelaNova>                                                          
                         {
+                            this.props.produtosSelecionados &&
                             this.props.produtosSelecionados.map( produtoSelecionado => {
                                 const id = produtoSelecionado.id
                                 const quantidade = produtoSelecionado.quantidade
