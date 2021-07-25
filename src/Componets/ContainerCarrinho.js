@@ -3,14 +3,10 @@ import styled from 'styled-components'
 
 //estilo do container 
 const Container = styled.div`
-    border: 1px solid #000;
-    margin-top: 35px;
-    margin-left: 15px;
-    width: 240px;
-    height: 801px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 ` 
-
-
 const TituloCarrinho = styled.p`
     font-size: 24px;
     font-weight: bolder;
@@ -35,7 +31,8 @@ const BotaoRemover = styled.button`
     margin-top: 10px;
     margin-left: 10px;
     font-size: 15px;
-    width: 40%;
+    width: 100%;
+    opacity: .5;
 
     &:hover{
      background-color: red;
@@ -56,40 +53,57 @@ const TelaNova = styled.div`
         margin-top: 10px;
     }
 `
-
 const Informacao = styled.div`
 display: flex;
 flex-direction: column;
 `
-class ContainerCarrinho extends React.Component {
+const Item = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: .7rem;
+`
 
+class ContainerCarrinho extends React.Component {
   
     render(){
-        console.log(this.props.produtosSelecionados, "o que é")
         return(
-           <Container>
-               <Informacao>
-                 <TituloCarrinho>Carrinho:</TituloCarrinho>                
-                 <TelaNova>
-                      {this.props.produtosSelecionados.map(produto => 
-                    <>    
-                    <p>{produto.name}</p>                    
-                    <p>R$: {produto.value},00</p>   
-                    <p>Qtd: {produto.quantidade}x</p>             
+            <Container>
+                <Informacao>
+                    <TituloCarrinho>Carrinho:</TituloCarrinho>                
+                    <TelaNova>                                                          
+                        {
+                            this.props.produtosSelecionados &&
+                            this.props.produtosSelecionados.map( produtoSelecionado => {
+                                const id = produtoSelecionado.id
+                                const quantidade = produtoSelecionado.quantidade
+                                const [produtoDados] = this.props.listaProdutos.filter( produto => produto.id===id )
 
-                    <BotaoRemover onClick = {() => this.props.removerProdutoCarrinho(produto.id)}>
-                    Remover
-                   </BotaoRemover>                       
-                   </>                
-                     )}
-          </TelaNova>
-                </Informacao>
+                                return <Item key={id}>
+                                        <br/>
+                                        <p>
+                                        {`${quantidade}x ${produtoDados.name}`}
+                                        </p>
+                                        <BotaoRemover onClick={() => this.props.removerProdutoCarrinho(id)}>Remover</BotaoRemover>
+                                    </Item>
+                            })
+                        }
+                </TelaNova>
+            </Informacao>
                 <ValorTotal>  
-                    Valor Total: R$ {this.props.produtosSelecionados.reduce((Prev, produto) => {
-                        return Prev + produto.value * produto.quantidade;
-                    },0)}
+                    Valor Total: R$ {
+                        this.props.produtosSelecionados.reduce( (total,produtoSelecionado) => {
+                            const id = produtoSelecionado.id
+                            const quantidade = produtoSelecionado.quantidade
+                            const [produtoDados] = this.props.listaProdutos.filter( produto => produto.id===id )
+
+                            return total+quantidade*produtoDados.value    
+                        }, 0)
+                    }
                 </ValorTotal>
-            </Container>
+        </Container>
         )
     }
 }
