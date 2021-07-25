@@ -3,11 +3,9 @@ import styled from 'styled-components'
 
 //estilo do container 
 const Container = styled.div`
-    border: 1px solid #000;
-    margin-top: 35px;
-    margin-left: 15px;
-    width: 240px;
-    height: 801px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 ` 
 const TituloCarrinho = styled.p`
     font-size: 24px;
@@ -33,7 +31,8 @@ const BotaoRemover = styled.button`
     margin-top: 10px;
     margin-left: 10px;
     font-size: 15px;
-    width: 40%;
+    width: 100%;
+    opacity: .5;
 
     &:hover{
      background-color: red;
@@ -58,6 +57,15 @@ const Informacao = styled.div`
 display: flex;
 flex-direction: column;
 `
+const Item = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: .7rem;
+`
+
 class ContainerCarrinho extends React.Component {
   
     render(){
@@ -72,10 +80,13 @@ class ContainerCarrinho extends React.Component {
                                 const quantidade = produtoSelecionado.quantidade
                                 const [produtoDados] = this.props.listaProdutos.filter( produto => produto.id===id )
 
-                                return <div key={id}>
+                                return <Item key={id}>
+                                        <br/>
+                                        <p>
                                         {`${quantidade}x ${produtoDados.name}`}
+                                        </p>
                                         <BotaoRemover onClick={() => this.props.removerProdutoCarrinho(id)}>Remover</BotaoRemover>
-                                    </div>
+                                    </Item>
                             })
                         }
                 </TelaNova>
