@@ -92,11 +92,17 @@ class ContainerCarrinho extends React.Component {
                         }
                 </TelaNova>
             </Informacao>
-                {/* <ValorTotal>  
-                    Valor Total: R$ {this.props.produtosSelecionados.reduce((Prev, produto) => {
-                        return Prev + produto.value * produto.quantidade;
-                    },0)}
-                </ValorTotal> */}
+                <ValorTotal>  
+                    Valor Total: R$ {
+                        this.props.produtosSelecionados.reduce( (total,produtoSelecionado) => {
+                            const id = produtoSelecionado.id
+                            const quantidade = produtoSelecionado.quantidade
+                            const [produtoDados] = this.props.listaProdutos.filter( produto => produto.id===id )
+
+                            return total+quantidade*produtoDados.value    
+                        }, 0)
+                    }
+                </ValorTotal>
         </Container>
         )
     }
