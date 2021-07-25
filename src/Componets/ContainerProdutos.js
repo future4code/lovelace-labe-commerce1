@@ -43,14 +43,8 @@ export default class ContainerProdutos extends React.Component {
         ordenacao: ""
     }
 
-<<<<<<< HEAD
-    adicionarProdutoAoCarrinho = (id) => {
-        this.props.adicionarProdutosAoCarrinho(id)
-        console.log(id,"produto")
-=======
     adicionarProdutosAoCarrinho = (id) => {
         this.props.adicionarProdutosAoCarrinho(id)
->>>>>>> 566e0f7019af37c0eef84ff8a2b385d208a554fe
     }
     onChangeOrdenacao = event => {
         this.setState({ ordenacao: event.target.value })

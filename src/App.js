@@ -5,41 +5,40 @@ import ContainerCarrinho from './Componets/ContainerCarrinho';
 import ContainerFiltro from './Componets/ContainerFiltro';
 import ContainerProdutos from './Componets/ContainerProdutos';
 
-
+const listaProdutos = [
+  {
+    id: 1,
+    name: "Foguete da Missão Lindo 11",
+    value: 10.0,
+    imageUrl: "https://picsum.photos/201",
+  },
+  {
+    id: 2,
+    name: "Avião da Missão Apollo 11",
+    value: 20.0,
+    imageUrl: "https://picsum.photos/202",
+  },
+  {
+    id: 3,
+    name: "Barco da Missão Apollo 11",
+    value: 30.0,
+    imageUrl: "https://picsum.photos/200",
+  },
+  {
+    id: 4,
+    name: "Capacete",
+    value: 5.0,
+    imageUrl: "https://picsum.photos/205",
+  }
+]
 
 class App extends React.Component {
 
   state = {
- listaProdutos:  [
-      {
-        id: 1,
-        name: "Foguete da Missão Lindo 11",
-        value: 10.0,
-        imageUrl: "https://picsum.photos/201",
-      },
-      {
-        id: 2,
-        name: "Avião da Missão Apollo 11",
-        value: 20.0,
-        imageUrl: "https://picsum.photos/202",
-      },
-      {
-        id: 3,
-        name: "Barco da Missão Apollo 11",
-        value: 30.0,
-        imageUrl: "https://picsum.photos/200",
-      },
-      {
-        id: 4,
-        name: "Capacete",
-        value: 5.0,
-        imageUrl: "https://picsum.photos/205",
-      }
-    ],
     filtroValorMaximo: "",
     filtroValorMinimo: "",
     filtroNome: "",
-    carrinho: []  
+    produtosSelecionados: []  
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
@@ -69,51 +68,39 @@ class App extends React.Component {
       }
       produtoCarrinho.push(addCarrinho)
       console.log(produtoCarrinho,"carrinho")
+
     }else{
       const qtde = produtoCarrinho[carrinhoCheio].quantidade
       produtoCarrinho[carrinhoCheio] = {
         ...produtoCarrinho[carrinhoCheio],quantidade: qtde + 1 
         
       }    
+     await this.setState({carrinho: produtoCarrinho})
 
-    await this.setState({carrinho: produtoCarrinho})
     }
+
+    const jaAdicionado = this.state.produtosSelecionados.some( produto => {
+      return produto.id===id 
+    })
+
+    if( !jaAdicionado ){
+      const novoItem = {id, quantidade: 0}
+      const listaComItem = [...this.state.produtosSelecionados, novoItem]
+      await this.setState({ produtosSelecionados: listaComItem })
+    } 
+
+    const novaLista = this.state.produtosSelecionados.map( produto => {
+      if(id === produto.id)
+        return { ...produto, quantidade: produto.quantidade+1 }
+
+      return produto
+    })
+
+    await this.setState({ produtosSelecionados: novaLista })
     
-    
-  
-
-
-    // const jaAdicionado = this.state.produtosSelecionados.some( produto => {
-    //   return produto.id===id 
-    // })
-
-    // if( !jaAdicionado ){
-    //   const novoItem = {id, quantidade: 0}
-    //   const listaComItem = [...this.state.produtosSelecionados, novoItem]
-    //   await this.setState({ produtosSelecionados: listaComItem })
-    // } 
-
-    // const novaLista = this.state.produtosSelecionados.map( produto => {
-    //   if(id === produto.id)
-    //     return { ...produto, quantidade: produto.quantidade+1 }
-
-    //   return produto
-    // })
-
-    // await this.setState({ produtosSelecionados: novaLista })
-    // 
   }
-<<<<<<< HEAD
-  
-  
-=======
 
   removerProdutoCarrinho = async (id) => {
->>>>>>> 566e0f7019af37c0eef84ff8a2b385d208a554fe
-
-
-
-   removerProdutoCarrinho = async (id) => {
      const [produtoARemover] = this.state.carrinho.filter(produto => {
        return id===produto.id
     })
@@ -146,15 +133,10 @@ class App extends React.Component {
       <div className="App">
         <ContainerFiltro  
           setInput={this.setInput}
-          filtros={{    
-            filtroValorMaximo: this.state.filtroValorMaximo,
-            filtroValorMinimo: this.state.filtroValorMinimo,
-            filtroNome: this.state.filtroNome,
-          }}
         />
 
         <ContainerProdutos
-          listaProdutos={this.state.listaProdutos}
+          listaProdutos={listaProdutos}
           adicionarProdutosAoCarrinho={this.adicionarProdutosAoCarrinho}
           filtros={{    
             filtroValorMaximo: this.state.filtroValorMaximo,
@@ -165,7 +147,7 @@ class App extends React.Component {
 
         <ContainerCarrinho
           produtosSelecionados={this.state.carrinho}
-          listaProdutos={this.state.listaProdutos}
+          listaProdutos={listaProdutos}
           removerProdutoCarrinho={this.removerProdutoCarrinho}
         />
       </div>
