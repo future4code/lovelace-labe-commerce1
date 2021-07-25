@@ -38,19 +38,28 @@ class App extends React.Component {
     filtroValorMaximo: "",
     filtroValorMinimo: "",
     filtroNome: "",
-    produtosSelecionados: []  
+    produtosSelecionados: [
+      {
+        id: 1,
+        quantidade: 4
+      },
+      {
+        id: 2,
+        quantidade: 3
+      }
+    ]  
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot){
-    if (this.state.produtosSelecionados !== prevState.produtosSelecionados) {
-      localStorage.setItem( 'produtos_selecionados', JSON.stringify(this.state.produtosSelecionados) )
-    }
-  }
+  // componentDidUpdate(prevProps, prevState, snapshot){
+  //   if (this.state.produtosSelecionados !== prevState.produtosSelecionados) {
+  //     localStorage.setItem( 'produtos_selecionados', JSON.stringify(this.state.produtosSelecionados) )
+  //   }
+  // }
 
-  componentDidMount(){
-    const produtos_selecionados = JSON.parse(localStorage.getItem('produtos_selecionados'))
-    this.setState({ produtosSelecionados: produtos_selecionados })
-  }
+  // componentDidMount(){
+  //   const produtos_selecionados = JSON.parse(localStorage.getItem('produtos_selecionados'))
+  //   this.setState({ produtosSelecionados: produtos_selecionados })
+  // }
 
   adicionarProdutosAoCarrinho = async (id) => {
     //recebendo estado do carrinho  
@@ -123,10 +132,11 @@ class App extends React.Component {
     }
 
      this.setState({ carrinho: novaLista})
-   }
-   setInput = async ob => {
-     await this.setState(ob)
-   }
+  }
+
+  setInput = async ob => {
+    await this.setState(ob)
+  }
 
   render(){
     return (
@@ -146,7 +156,7 @@ class App extends React.Component {
         />
 
         <ContainerCarrinho
-          produtosSelecionados={this.state.carrinho}
+          produtosSelecionados={this.state.produtosSelecionados}
           listaProdutos={listaProdutos}
           removerProdutoCarrinho={this.removerProdutoCarrinho}
         />
