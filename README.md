@@ -20,7 +20,7 @@
 ```
 ## Mock de design
 
-<img src="Screenshot from 2021-07-23 16-45-52.png">
+<img src="Screenshot from 2021-07-25 16-55-56.png">
 
 
 ### Hierarquia de dados
