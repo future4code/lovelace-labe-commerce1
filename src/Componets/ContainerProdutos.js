@@ -43,8 +43,8 @@ export default class ContainerProdutos extends React.Component {
         ordenacao: ""
     }
 
-    adicionarProdutosAoCarrinho = (id) => {
-        this.props.adicionarProdutosAoCarrinho(id)
+    adicionarProdutoAoCarrinho = (id) => {
+        this.props.adicionarProdutoAoCarrinho(id)
     }
     onChangeOrdenacao = event => {
         this.setState({ ordenacao: event.target.value })
@@ -99,7 +99,7 @@ export default class ContainerProdutos extends React.Component {
                                     <CardProduto 
                                         key={index}
                                         produto={produto}
-                                        adicionarProdutosAoCarrinho={this.adicionarProdutosAoCarrinho}
+                                        adicionarProdutoAoCarrinho={this.adicionarProdutoAoCarrinho}
                                     />
                                 );
                             })

@@ -34,7 +34,6 @@ const Description = Styled.div`
     width: 100%;
     height: 100%;
 `
-
 const Button = Styled.button`
     margin-top: 10px;
     border: none;
@@ -63,7 +62,7 @@ export default class CardProduto extends React.Component {
                     <h4>{name}</h4>
                     <Price>R$: {value}</Price>
                 </Description>
-                <Button onClick={() => this.props.adicionarProdutosAoCarrinho(id)}>
+                <Button onClick={() => this.props.adicionarProdutoAoCarrinho(id)}>
                     Adicionar ao carrinho
                 </Button>
             </Card>

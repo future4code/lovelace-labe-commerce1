@@ -61,32 +61,7 @@ class App extends React.Component {
   //   this.setState({ produtosSelecionados: produtos_selecionados })
   // }
 
-  adicionarProdutosAoCarrinho = async (id) => {
-    //recebendo estado do carrinho  
-    let produtoCarrinho = this.state.carrinho;
-    //verificando se o carrinho estar vazio 
-    let carrinhoCheio = produtoCarrinho.findIndex(produto => produto.id === id ) 
-    if(carrinhoCheio === -1){
-      const itemCarrinho = this.state.listaProdutos.find(item => item.id === id )
-
-      const addCarrinho = {
-        id: itemCarrinho.id,
-        value: itemCarrinho.value,
-        name: itemCarrinho.name,
-        quantidade: 1
-      }
-      produtoCarrinho.push(addCarrinho)
-      console.log(produtoCarrinho,"carrinho")
-
-    }else{
-      const qtde = produtoCarrinho[carrinhoCheio].quantidade
-      produtoCarrinho[carrinhoCheio] = {
-        ...produtoCarrinho[carrinhoCheio],quantidade: qtde + 1 
-        
-      }    
-     await this.setState({carrinho: produtoCarrinho})
-
-    }
+  adicionarProdutoAoCarrinho = async (id) => {
 
     const jaAdicionado = this.state.produtosSelecionados.some( produto => {
       return produto.id===id 
@@ -106,32 +81,32 @@ class App extends React.Component {
     })
 
     await this.setState({ produtosSelecionados: novaLista })
-    
   }
 
   removerProdutoCarrinho = async (id) => {
-     const [produtoARemover] = this.state.carrinho.filter(produto => {
-       return id===produto.id
+
+    const [produtoARemover] = this.state.produtosSelecionados.filter(produto => {
+      return id===produto.id
     })
 
     let novaLista 
 
-     if(produtoARemover.quantidade===1){
-       novaLista = this.state.carrinho.filter(produto => {
+    if(produtoARemover.quantidade===1){
+      novaLista = this.state.produtosSelecionados.filter(produto => {
         return id!==produto.id
-       })
-     }
-     else{
-      novaLista = this.state.carrinho.map(produto => {
+      })
+    }
+    else{
+      novaLista = this.state.produtosSelecionados.map(produto => {
 
         if(id===produto.id)
-           return {...produto, quantidade: produto.quantidade-1}
+          return {...produto, quantidade: produto.quantidade-1}
         else
           return produto
-       })
+      })
     }
 
-     this.setState({ carrinho: novaLista})
+    this.setState({ produtosSelecionados: novaLista})
   }
 
   setInput = async ob => {
@@ -147,7 +122,7 @@ class App extends React.Component {
 
         <ContainerProdutos
           listaProdutos={listaProdutos}
-          adicionarProdutosAoCarrinho={this.adicionarProdutosAoCarrinho}
+          adicionarProdutoAoCarrinho={this.adicionarProdutoAoCarrinho}
           filtros={{    
             filtroValorMaximo: this.state.filtroValorMaximo,
             filtroValorMinimo: this.state.filtroValorMinimo,
